@@ -1,0 +1,15 @@
+body {
+	background-color: #566573;
+	text-align: center;
+}
+
+video {
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+h2 {
+	color: #ecf0f1;
+}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>A Classic</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+<h1 id="title">A Classic</h1>
+
+<video src="https://www.cs.tufts.edu/comp/20/classic.mp4" id="a_classic" controls></video>
+<div id="lyrics"> </div>
+
+<script>
+	var video = document.getElementById("a_classic");
+	var caption = document.getElementById("lyrics");
+        	
+	video.addEventListener("timeupdate", function() {
+	
+	var time = video.currentTime;
+	
+		if(time >= 9.7 && time < 13) {
+			caption.innerHTML = "<h2>Children have You ever met the Bogeyman before </h2>";
+		}
+
+
+                if (time >= 14  && time < 17) { 
+                        caption.innerHTML = "<h2>No, of course You haven't for You're much too good, I'm sure; </h2>";
+                }
+                
+                if (time >= 18 && time < 21) {
+                        caption.innerHTML = "<h2>Don't You be afraid of him if he should visit You, </h2>";
+                }
+
+
+                if (time >= 21.5 && time < 25) {
+                        caption.innerHTML = "<h2>He's a great big coward, so I'll tell You what to do</h2>";
+                }
+
+
+                if (time >= 25.5 && time < 29) {
+                        caption.innerHTML = "<h2>Hush, hush, hush, here comes the Bogeyman,</h2>";
+                }
+
+
+                if (time >= 29.5 && time < 33) {
+                        caption.innerHTML = "<h2>Don't let him come too close to You, he'll catch you if he can.</h2>";
+                }
+
+
+                if (time >= 33.5 && time < 36.5) {
+                        caption.innerHTML = "<h2>Just pretend that you're a crocodile</h2>";
+                }
+
+                if (time >= 37 && time < 41) {
+                        caption.innerHTML = "<h2>And you will find that Bogeyman will run away a mile.</h2>";
+                }
+
+
+                if (time >= 41.5 && time < 45) {
+                        caption.innerHTML = "<h2>Say Shoo shoo and stick him with a pin</h2>";
+                }
+
+
+                if (time >= 45.5 && time < 49) {
+                        caption.innerHTML = "<h2>Bogeyman will very nearly jump out of his skin</h2>";
+                }
+ 
+
+                if (time >= 49.5 && time < 53) {
+                        caption.innerHTML = "<h2>Say buzz buzz just like the wasps that stings</h2>";
+                }
+
+
+                if (time >= 53.1 && time < 56.6) {
+                        caption.innerHTML = "<h2>Bogeyman will think you are an elephant with wings</h2>";
+                }
+
+
+                if (time >= 64.5 && time < 68) {
+                        caption.innerHTML = "<h2>Tell him you've got soldiers in your bed</h2>";
+                }
+
+
+                if (time >= 68.5 && time < 72) {
+                        caption.innerHTML = "<h2>For he will never guess that they are only made of lead </h2>";
+                }
+
+                if (time >= 81 && time < 84) {
+                        caption.innerHTML = "<h2>Say Hush hush, he'll think that you're asleep </h2>";
+                }
+
+
+                if (time >= 84.5 && time < 88.5) {
+                        caption.innerHTML = "<h2>If you make a lovely snore away he'll softly creep </h2>";
+                }
+
+
+                if (time >= 89 && time < 92) {
+                        caption.innerHTML = "<h2>Sing this tune you children one and all </h2>";
+                }
+
+
+                if (time >= 92.5 && time < 95) {
+                        caption.innerHTML = "<h2>Bogeyman will run away, he'll think it's Henry Hall! </h2>";
+                }
+
+
+                if (time >= 96 && time < 99) {
+                        caption.innerHTML = "<h2>When the shadows of the evening creep across the sky </h2>";
+                }
+
+
+                if (time >= 100 && time < 103) {
+                        caption.innerHTML = "<h2>And your Mummy comes upstairs to sing a lullaby </h2>";
+                }
+
+
+                if (time >= 104.5 && time < 107) {
+                        caption.innerHTML = "<h2> Tell her that the bogeyman no longer frightens you </h2>";
+                }
+
+
+                if (time >= 107.5 && time < 111) {
+                        caption.innerHTML = "<h2>Uncle Henry's very kindly told you what to do </h2>"
+                }
+
+
+                if (time >= 111.5 && time < 115) {
+                        caption.innerHTML = "<h2> Hush, hush, hush, here comes the Bogeyman</h2>";
+                }
+
+                if (time >= 115.5 && time < 119) {
+                        caption.innerHTML = "<h2>Don't let him come too close to you, He'll catch you if he can. </h2>";
+                }
+
+                if (time >= 119.5 && time < 122) {
+                        caption.innerHTML = "<h2>Just pretend your teddy bear's a dog </h2>";
+                }
+
+                if (time >= 123 && time < 127) {
+                        caption.innerHTML = "<h2>Then shout out, 'Fetch him, Teddy!' and he'll hop off like a frog. </h2>";
+                }
+
+                if (time >= 135 && time < 139) {
+                        caption.innerHTML = "<h2>Say Meoow, pretend that you're a cat </h2>";
+                }
+
+
+                if (time >= 139.5 && time < 142) {
+                        caption.innerHTML = "<h2>He'll think you may scratch him that make him fall down flat </h2>";
+                }
+
+
+                if (time >= 143 && time < 146) {
+                        caption.innerHTML = "<h2>Just pretend he isn't really there </h2>";
+                }
+
+
+                if (time >= 147 && time < 151) {
+                        caption.innerHTML = "<h2>You will find that Bogey man will vanish in thin air </h2>";
+                }
+
+
+                if (time >= 159 && time < 162) {
+                        caption.innerHTML = "<h2> Here's one way to catch him without fail </h2>";
+                }
+
+
+                if (time >= 162 && time < 164) {
+                        caption.innerHTML = "<h2>Just keep a little salt with you </h2>";
+                }
+
+
+                if (time >= 164 && time < 167) {
+                        caption.innerHTML = "<h2> and put it on his tail </h2>";
+                }
+                
+
+
+	});
+	// Complete this section and create a CSS file named style.css
+</script>
+</body>
+</html>	
+
+

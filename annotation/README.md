@@ -1,0 +1,1 @@
+I believe I correctly implemented everything. I did not work with anyone on this assignment. I spent abour 3 hours on it. To center the video, I used code from a stackoverflow post explaining how to center videos in CSS.
