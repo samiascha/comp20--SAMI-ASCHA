@@ -60,54 +60,99 @@ function serverRequest() {
 
 
 		xhr.onreadystatechange = function () {
-			if (xhr.readyState == 4 && request.status = 200) {
+			if (xhr.readyState == 4 && xhr.status == 200) {
 				var response = xhr.responseText;
-				var parsed_objects = JSON.parse(response);
-				renderMap();
+				var parsed = JSON.parse(response);
+				renderMap(parsed, mylogin);
 			}
 		}
 		xhr.send(parameters);
+
+		console.log(xhr);
 
 	}
 
 	
 
-function renderMap()
+function renderMap(parsed, mylogin)
 {
-	me = new google.maps.LatLng(myLat, myLng);
+	
+	mylogin = "VKIDCFKV";
+	var me = new google.maps.LatLng(myLat, myLng);
 
 	var myOptions = {
-		zoom: 13, // The larger the zoom number, the bigger the zoom
-		center: landmark,
+		zoom: 13,
+		center: me,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 
 
 	var map;
 	var elem = document.getElementById("map")
-	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+	map = new google.maps.Map(document.getElementById("map"), myOptions);
 	
-	// Update map and go there...
-	map.panTo(me);
+
+	//map.panTo(me);
+
+	for (i = 0; i<parsed.length; i++) {
+		var id = parsed[i]["_id"];
+		var login = parsed[i]["login"];
+		var lat = parsed[i]["lat"];
+		var lng = parsed[i]["lng"];
+
+		var distance = google.maps.geometry.spherical.computeDistanceBetween(lat, lng);
+	}
 	
-	// Create a marker
+
+	
+	var pos = new google.maps.LatLng(lat, lng);
+
 	var marker = new google.maps.Marker({
 		position: me,
-		title: "Here I Am!"
+		title: login
 	});
-	marker.setMap(map);
+	
 
+
+	/*
+	var pos = new google.maps.LatLng(lat, lng);
+
+	if (mylogin == login) {
+		// Create a marker
+	
+	var marker = new google.maps.Marker({
+		position: me,
+		title: login
+	});
+	
+	}
+
+
+	else {
+		var marker = new google.maps.Marker({
+			position: pos,
+			title: login
+		});
+	}
+	*/
+	
+	//marker.setMap(map);
+	/*
 	var infowindow = new google.maps.InfoWindow();
 		
 	// Open info window on click of marker
 	google.maps.event.addListener(marker, 'click', function () {
-                infoWindow.setContent(this.content);
-                 infoWindow.open(map, this);
-                            });
-	
 
-	}
+                 infowindow.open(map, marker);
+                            });
+                            */
+
+	marker.setMap(map);
 	
+	}
+
+
+
 	</script>
 </head>
 	
