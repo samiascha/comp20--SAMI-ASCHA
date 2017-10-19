@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Landmarks</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+    <meta charset="utf-8">
+    
+        <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    </head>
+
+<body>
+	
+	<script>
+
+function init()
+{
+	map = new google.maps.Map(document.getElementByID)
+}
+
+function getMyLocation() {
+	
+	if (navigator.geolocation) { 	
+			
+			navigator.geolocation.getCurrentPosition(function(position) {
+				
+				myLat = position.coords.latitude;
+				myLng = position.coords.longitude;
+				
+			serverRequest();
+		});
+	}
+	else {
+		alert("Geolocation is not supported by your web browser.  What a shame!");
+	}
+	}
+
+
+function serverRequest() {
+		var mylogin = "VKIDCFKV";
+	 	
+		var xhr = new XMLHttpRequest();
+		var url = "https://defense-in-derpth.herokuapp.com/sendLocation";
+		var parameters = "login="+mylogin+"&lat="+myLat+"&lng="+myLng";
+		xhr.open('POST', url, true);
+
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4 && request.status = 200) {
+				var response = xhr.responseText;
+				var parsed_objects = JSON.parse(response);
+				renderMap();
+			}
+		}
+		xhr.send(parameters);
+
+	}
+
+	
+
+function renderMap()
+{
+	me = new google.maps.LatLng(myLat, myLng);
+
+	var myOptions = {
+		zoom: 13, // The larger the zoom number, the bigger the zoom
+		center: landmark,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+
+
+	var map;
+	var elem = document.getElementById("map")
+	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+	
+	// Update map and go there...
+	map.panTo(me);
+	
+	// Create a marker
+	var marker = new google.maps.Marker({
+		position: me,
+		title: "Here I Am!"
+	});
+	marker.setMap(map);
+
+	var infowindow = new google.maps.InfoWindow();
+		
+	// Open info window on click of marker
+	google.maps.event.addListener(marker, 'click', function () {
+                infoWindow.setContent(this.content);
+                 infoWindow.open(map, this);
+                            });
+	
+
+	}
+	
+	</script>
+</head>
+	
+	<body onload="getMyLocation()">
+		<div id="map"></div>
+	</body>
+
+
+
+  </body>
+</html>
+
