@@ -77,7 +77,7 @@ function serverRequest() {
 function renderMap(parsed, mylogin)
 {
 	
-	mylogin = "VKIDCFKV";
+	
 	var me = new google.maps.LatLng(myLat, myLng);
 
 	var myOptions = {
@@ -94,62 +94,78 @@ function renderMap(parsed, mylogin)
 
 	//map.panTo(me);
 
-	for (i = 0; i<parsed.length; i++) {
-		var id = parsed[i]["_id"];
-		var login = parsed[i]["login"];
-		var lat = parsed[i]["lat"];
-		var lng = parsed[i]["lng"];
+	console.log(parsed);
 
-		var distance = google.maps.geometry.spherical.computeDistanceBetween(lat, lng);
-	}
+
+
+	for (i = 0; i<parsed.people.length; i++) {
+		var id = parsed.people[i]["_id"];
+		var login = parsed.people[i]["login"];
+		var lat = parsed.people[i]["lat"];
+		var lng = parsed.people[i]["lng"];
+
+		var pos = new google.maps.LatLng(lat, lng);
+
+
+
+
+		if (mylogin == login) {
+		
 	
-
-	
-	var pos = new google.maps.LatLng(lat, lng);
-
-	var marker = new google.maps.Marker({
-		position: me,
-		title: login
-	});
-	
-
-
-	/*
-	var pos = new google.maps.LatLng(lat, lng);
-
-	if (mylogin == login) {
-		// Create a marker
-	
-	var marker = new google.maps.Marker({
-		position: me,
-		title: login
-	});
-	
-	}
-
-
-	else {
-		var marker = new google.maps.Marker({
+			var marker = new google.maps.Marker({
 			position: pos,
 			title: login
 		});
-	}
-	*/
 	
-	//marker.setMap(map);
-	/*
-	var infowindow = new google.maps.InfoWindow();
+		}
+
+	
+	
+		else {
+			
+			var marker = new google.maps.Marker({
+			position: pos,
+			title: login
+		});
+	
+		}
+	
+
+	
+		var infowindow = new google.maps.InfoWindow();
+
+		marker.addListener('click', function() {
+			infowindow.open(map, marker);
+		});
+	
+
+		marker.setMap(map);
+	}
+
+	for (i = 0; i<parsed.landmarks.length; i++) {
+		var id = parsed.landmarks[i]["_id"];
 		
-	// Open info window on click of marker
-	google.maps.event.addListener(marker, 'click', function () {
+		var lat = parsed.landmarks.geometry.coordinates[0];
+		var lng = parsed.landmarks.geometry.coordinates[1];
 
-                 infowindow.open(map, marker);
-                            });
-                            */
+		var landpos = new google.maps.LatLng(lat, lng);
 
-	marker.setMap(map);
+		var marker = new google.maps.Marker({
+			position: landpos,
+			title: login
+		});
 	
+
+
+		//var distance = google.maps.geometry.spherical.computeDistanceBetween(lat, lng);
 	}
+
+}
+
+	
+
+	
+	//var pos = new google.maps.LatLng(lat, lng);
 
 
 
