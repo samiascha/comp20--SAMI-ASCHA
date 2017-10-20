@@ -4,6 +4,7 @@
     <title>Landmarks</title>
     <meta name="viewport" content="initial-scale=1.0">
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+    <script src="https://maps.google.com/maps/api/js?libraries=geometry" async defer></script>
     <meta charset="utf-8">
     
         <style>
@@ -92,11 +93,11 @@ function renderMap(parsed, mylogin)
 	map = new google.maps.Map(document.getElementById("map"), myOptions);
 	
 
-	//map.panTo(me);
+
 
 	console.log(parsed);
 
-
+	
 
 	for (i = 0; i<parsed.people.length; i++) {
 		var id = parsed.people[i]["_id"];
@@ -105,17 +106,26 @@ function renderMap(parsed, mylogin)
 		var lng = parsed.people[i]["lng"];
 
 		var pos = new google.maps.LatLng(lat, lng);
+		
 
-
-
+		var dist = google.maps.geometry.spherical.computeDistanceBetween(pos, me);
+		var image = 'human.png';
 
 		if (mylogin == login) {
 		
-	
+			
 			var marker = new google.maps.Marker({
-			position: pos,
+			position: me,
 			title: login
+
+
 		});
+
+		marker.content = '<div id= "content">'+
+					"<div id='attr'>"+"Login: "+"</div>"+"<val>"+login+"</val>"+
+					"<div id='attr'>"+"Distance: "+"</div>"+"<val>"+dist+"</val>"+
+					"</div>";
+			
 	
 		}
 
@@ -125,39 +135,31 @@ function renderMap(parsed, mylogin)
 			
 			var marker = new google.maps.Marker({
 			position: pos,
-			title: login
+			title: login,
+			icon: image
+
+
 		});
-	
-		}
-	
 
-	
-		var infowindow = new google.maps.InfoWindow();
-
-		marker.addListener('click', function() {
-			infowindow.open(map, marker);
-		});
-	
-
-		marker.setMap(map);
-	}
-
-	for (i = 0; i<parsed.landmarks.length; i++) {
-		var id = parsed.landmarks[i]["_id"];
 		
-		var lat = parsed.landmarks.geometry.coordinates[0];
-		var lng = parsed.landmarks.geometry.coordinates[1];
-
-		var landpos = new google.maps.LatLng(lat, lng);
-
-		var marker = new google.maps.Marker({
-			position: landpos,
-			title: login
-		});
-	
+		
+		marker.content = '<div id= "content">'+
+					"<div id='attr'>"+"Login: "+"</div>"+"<val>"+login+"</val>"+
+					"<div id='attr'>"+"Distance: "+"</div>"+"<val>"+dist+"</val>"+
+					"</div>";
+			
+		}
+		
 
 
-		//var distance = google.maps.geometry.spherical.computeDistanceBetween(lat, lng);
+		var infoWindow = new google.maps.InfoWindow();
+			google.maps.event.addListener(marker, 'click', function () {
+                                infoWindow.setContent(this.content);
+                                infoWindow.open(map, this);
+                            });
+
+		
+		marker.setMap(map);
 	}
 
 }
