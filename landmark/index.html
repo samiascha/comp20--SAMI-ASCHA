@@ -110,13 +110,15 @@ function renderMap(parsed, mylogin)
 
 		var dist = google.maps.geometry.spherical.computeDistanceBetween(pos, me);
 		var image = 'human.png';
+		var myimage = 'me.png'
 
 		if (mylogin == login) {
 		
 			
 			var marker = new google.maps.Marker({
 			position: me,
-			title: login
+			title: login,
+			icon: myimage
 
 
 		});
