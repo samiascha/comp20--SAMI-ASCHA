@@ -164,8 +164,29 @@ function renderMap(parsed, mylogin)
 		marker.setMap(map);
 	}
 
-}
 
+
+	for (i = 0; i<parsed.landmarks.length; i++) {
+		var landid = parsed.landmarks[i]["_id"];
+		
+		var landlat = parsed.landmarks.geometry.coordinates[0];
+		var landlng = parsed.landmarks.geometry.coordinates[1];
+
+		var landpos = new google.maps.LatLng(landlat, landlng);
+		
+		//var landdist = google.maps.geometry.spherical.computeDistanceBetween(landpos, me);
+
+		var landmarker = new google.maps.Marker({
+			position: landpos
+			
+		});
+
+		landmarker.setMap(map);
+
+
+	}
+
+}
 	
 
 	
