@@ -4,9 +4,6 @@
 
     <title>Landmarks</title>
     <meta name="viewport" content="initial-scale=1.0">
-    
-
-
     <script src="https://maps.google.com/maps/api/js?libraries=geometry" async defer></script>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" type="text/css"/>
@@ -60,7 +57,9 @@ function serverRequest() {
 		}
 		xhr.send(parameters);
 
-		console.log(xhr);
+
+
+
 
 	}
 
@@ -69,6 +68,7 @@ function serverRequest() {
 function renderMap(parsed, mylogin)
 {
 	
+	console.log(parsed);
 	
 	var me = new google.maps.LatLng(myLat, myLng);
 
@@ -86,7 +86,7 @@ function renderMap(parsed, mylogin)
 
 
 
-	console.log(parsed);
+
 
 	
 
@@ -102,6 +102,10 @@ function renderMap(parsed, mylogin)
 		var dist = google.maps.geometry.spherical.computeDistanceBetween(pos, me);
 		var image = 'human.png';
 		var myimage = 'me.png'
+
+		dist = dist * .00062137; //convert to miles
+		dist = parseFloat(dist).toFixed(2);
+
 
 		if (mylogin == login) {
 		
@@ -135,7 +139,7 @@ function renderMap(parsed, mylogin)
 		
 		marker.content = '<div id= "content">'+
 					"<div id='attr'>"+"Login: "+"</div>"+"<val>"+login+"</val>"+
-					"<div id='attr'>"+"Distance: "+"</div>"+"<val>"+dist+"</val>"+
+					"<div id='attr'>"+"Distance: "+"</div>"+"<val>"+dist+" miles"+"</val>"+
 					"</div>";
 			
 		}
@@ -157,7 +161,11 @@ function renderMap(parsed, mylogin)
 	for (i = 0; i<parsed.landmarks.length; i++) {
 		var landid = parsed.landmarks[i]["_id"];
 
+
+
 		var landmarkname = parsed.landmarks[i].properties["Location_Name"];
+
+		var details = parsed.landmarks[i].properties["Details"];
 		
 		var landlat = parsed.landmarks[i].geometry.coordinates[1];
 		var landlng = parsed.landmarks[i].geometry.coordinates[0];
@@ -168,6 +176,9 @@ function renderMap(parsed, mylogin)
 		
 		var landdist = google.maps.geometry.spherical.computeDistanceBetween(landpos, me);
 
+		landdist = landdist * .00062137; //convert to miles
+		landdist = parseFloat(landdist).toFixed(2);
+
 		var landimage = 'landmark.png'
 		var landmarker = new google.maps.Marker({
 			position: landpos,
@@ -177,8 +188,8 @@ function renderMap(parsed, mylogin)
 
 
 	 	landmarker.content = '<div id= "content">'+
-					"<div id='attr'>"+"Name: "+"</div>"+"<val>"+landmarkname+"</val>"+
-					"<div id='attr'>"+"Distance: "+"</div>"+"<val>"+landdist+"</val>"+
+					"<div id='attr'>"+"Here's a landmark near you: "+"</div>"+"<val>"+details+"</val>"+
+					"<div id='attr'>"+"Distance: "+"</div>"+"<val>"+landdist+" miles"+"</val>"+
 					"</div>";
 
 		var infoWindow = new google.maps.InfoWindow();
@@ -191,15 +202,9 @@ function renderMap(parsed, mylogin)
 
 		landmarker.setMap(map);
 
-
 	}
 
 }
-	
-
-	
-
-
 
 	</script>
 </head>
