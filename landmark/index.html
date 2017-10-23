@@ -14,11 +14,6 @@
 	
 	<script>
 
-function init()
-{
-	map = new google.maps.Map(document.getElementByID)
-}
-
 function getMyLocation() {
 	
 	if (navigator.geolocation) { 	
@@ -68,7 +63,6 @@ function serverRequest() {
 function renderMap(parsed, mylogin)
 {
 	
-	console.log(parsed);
 	
 	var me = new google.maps.LatLng(myLat, myLng);
 
@@ -202,11 +196,11 @@ function renderMap(parsed, mylogin)
 
 		landmarker.setMap(map);
 
-		//var closest = Math.min.apply(Math, landdist);
 
-		console.log(landdist);
 
 	}
+
+
 
 
 
