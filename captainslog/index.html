@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Captain's Log</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        // Your work will be done here...
+
+        $(document).ready(function() {
+
+            $("#log").append(localStorage.getItem('message'));
+
+            getInput();
+        })
+
+        function getInput() { 
+
+        
+                $("#msg").keyup(function(entry) {
+
+                    if (entry.keyCode == 13) {
+                        $(this).trigger("enterKey");
+                    }
+
+                });      
+
+                $("#msg").bind("enterKey", function(entry) {
+                    var timestamp = new Date();
+
+                    if ($("#msg").val() != ""){
+
+                        var message = "<p>" + timestamp + " - " + $("#msg").val() + "</p>"
+                        $("#log").prepend(message);
+
+                        if (localStorage.getItem('message') == null) {
+                            localStorage.setItem('message', "");
+
+                         }
+
+                    var prev = message + " " + localStorage.getItem('message');
+                    localStorage.setItem('message', prev);
+                        }
+
+
+               
+                    $(this).val("");
+                });
+
+
+                    }
+        
+	
+    </script>
+</head>
+
+<body>
+    <h1>Captain's Log</h1>
+    <h3>New entry: <input type="text" id="msg" name="msg" size="30" /></h3>
+    <div id="log"></div>
+</body>
+</html>
+
+
