@@ -26,12 +26,13 @@
 
 	<h2> 1. Cross-Site Scripting </h2>
 
-	<p> Per Ming's example in class, I was able to inject malicious scripts into the database and compromise the site's functionality. This issue is located in /sendLocation. Here are two examples of curl injections that unwantedly alter the client's view (script tags removed). The first redirects the website to youtube, while the second imposes an alert message: </p>
+	<p> Per Ming's example in class, I was able to inject malicious scripts into the database and compromise the site's functionality. This issue is located in /sendLocation. Here are two examples of curl injections that unwantedly alter the client's view (script tags removed). The first imposes an alert message, while the second redirects the website to youtube: </p>
+
+	<p> <i> curl -i --data "login=script window.alert('HOW DO I TURN OFF CAPS LOCK'); /script&lat=-47&lng=-47" https://pure-river-81762.herokuapp.com/sendLocation </i> </p>
+
 
 	<p> <i> curl -i --data "login=script window.location='https://www.youtube.com'; /script&lat=-47&lng=-47" https://pure-river-81762.herokuapp.com/sendLocation </i> </p>
 
-
-	<p> <i> curl -i --data "login=script window.alert('HOW DO I TURN OFF CAPS LOCK'); /script&lat=-47&lng=-47" https://pure-river-81762.herokuapp.com/sendLocation </i> </p>
 
 	<p> <strong> Client view: </strong> </p>
 
