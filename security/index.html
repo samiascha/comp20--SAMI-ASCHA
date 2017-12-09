@@ -2,31 +2,35 @@
 <html>
 <head>
         <title>COMP20 Assignment 4</title>
+        <style>body {font-size: 25px;} .tab { margin-left: 70px; } </style>
+
 
 <body>
 
-	<h1> Assignment 4: Security and Privacy Assessment </h1>
+	<h1> <center> Assignment 4: Security and Privacy Assessment </center> </h1>
 
-	<h1> Introduction</h1>
+	<h2> <center> Introduction </center> </h2>
 	<p> The asssignment asks that each student perform a security and privacy assessment of his/her partner's client and server-side applications (assignments 2 and 3). The application returns checkins and nearest landmarks in JSON format. </p>
 	<p> My partner's web application can be found <a href="https://pure-river-81762.herokuapp.com/">here</a>.</p>
 
 
-	<h1> Methodology </h1>
+	<h2> <center> Methodology </center> </h2>
 	<p> The web application suffers from several security vulnerabilities. Before looking at my partner's code, I performed a number data injections using curl per Ming's examples in class to get a feel for the app's glaring security flaws. I also looked into flooding the database using a simple bash shell script. Additionally, I used Burp Suite to perform automated security testing. </p>
 
-	<h1> Abstract of Findings </h1>
+	<h2> <center> Abstract of Findings </center> </h2>
 	<p> <strong> XSS: </strong> XSS refers to cross-site scripting, which allows the attacker to inject malicious content into the application's database, thereby compromising the site's intended purpose. Without any parameters to defend against this, the entire web application can be ruined. </p>
 
 	<p> <strong> No data limit: </strong> My partner's database does not set a limit (both overall and per user), which could make it susceptible to DDOS attacks. The database can be flooded arbitrarily, which is obviously something that should be avoided. </p>
 
 	<p> <strong> NoSQL Injection: </strong> </p>
 
-	<h1> Issues Found </h1>
+	<h2> <center> Issues Found </center> </h2>
 
-	<h2> 1. Cross-Site Scripting </h2>
+	<h3> 1. Cross-Site Scripting </h3>
 
-	<p> Per Ming's example in class, I was able to inject malicious scripts into the database and compromise the site's functionality. This issue is located in /sendLocation. Here are two examples of curl injections that unwantedly alter the client's view (script tags removed). The first imposes an alert message, while the second redirects the website to youtube: </p>
+	<p> Severity: <strong> High </strong> </p>
+
+	<p> Per Ming's example in class, I was able to inject malicious scripts into the database and compromise the site's functionality using a POST request. This issue is located in /sendLocation. Here are two examples of curl injections that unwantedly alter the client's view (script tags removed). The first imposes an alert message, while the second redirects the website to youtube: </p>
 
 	<p> <i> curl -i --data "login=script window.alert('HOW DO I TURN OFF CAPS LOCK'); /script&lat=-47&lng=-47" https://pure-river-81762.herokuapp.com/sendLocation </i> </p>
 
@@ -34,27 +38,38 @@
 	<p> <i> curl -i --data "login=script window.location='https://www.youtube.com'; /script&lat=-47&lng=-47" https://pure-river-81762.herokuapp.com/sendLocation </i> </p>
 
 
-	<p> <strong> Client view: </strong> </p>
+	<p> <center> <strong> Client view: </strong> </center> </p>
 
-	<video width="500" height="300" controls>
-  	<source src="curlredirect.mov" type="video/mp4"> </video>
-
-
+	<center> <video width="500" height="300" controls>
+  	<source src="curlredirect.mov" type="video/mp4"> </video> </center>
 
 
 
-	<h2> 2. No data limit: </h2>
-	<p> As stated in the abstract, I was able curl to my partner's database an arbitrary number of times using a bash shell script. With a simple do while loop, I was able to flood my partner's database. With no limits, this makes it susceptible to DDOS attacks. </p> 
 
-	<p>.sh file contents:</p>
+	<h3> 2. No data limit: </h3>
+
+	<p> Severity: <strong> High </strong> </p>
+
+	<p> As stated in the abstract, I was able curl to my partner's database an arbitrary number of times using a bash shell script. With a simple do while loop, I was able to flood my partner's database. With no limits, this makes it susceptible to DDOS attacks. Vulnerability is located in /sendLocation. Script execution and .sh file contents below. </p> 
+
 	<p> <i> while true </i> </p>
 	<p> <i> do </i> </p>
 	<p> <i> curl --data "login=script window.location='https://www.youtube.com';/script&lat=0&lng=0" https://pure-river-81762.herokuapp.com/sendLocation </i> </p>
 	<p> <i> done </i> </p>
 
-	<p> Executed script: </p>
-	<video width="300" height="400" controls>
+	<p> <center> <strong> Executed script and corresponding database (mongodb) view: </strong> </center> </p>
+	
+	<center> <video width="350" height="450" controls>
   	<source src="databaseflood.mov" type="video/mp4"> </video>
+  	<img src="mongodbview.png" width="400" height="450" /> </center>
+
+
+
+
+
+
+
+
 
 
 
