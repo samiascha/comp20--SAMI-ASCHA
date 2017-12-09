@@ -22,7 +22,7 @@
 
 	<p> <strong> No data limit: </strong> My partner's database does not set a limit (both overall and per user), which could make it susceptible to DDOS attacks. The database can be flooded arbitrarily, which is obviously something that should be avoided. </p>
 
-	<p> <strong> NoSQL Injection: </strong> </p>
+	<p> <strong> X-Frame-Options Header Not Set: Without the necessary HTML headers, hackers can hijack the website's functionality and potentially steal sensitive data from the user. </strong> </p> 
 
 	<h2> <center> Issues Found </center> </h2>
 
@@ -42,6 +42,8 @@
 
 	<center> <video width="500" height="300" controls>
   	<source src="curlredirect.mov" type="video/mp4"> </video> </center>
+
+  	<p> <strong> Resolution: Sanitize data and check for invalid characters like "<" and ">" that allow for scripting. </strong> </p>
 
 
 
@@ -63,21 +65,28 @@
   	<source src="databaseflood.mov" type="video/mp4"> </video>
   	<img src="mongodbview.png" width="400" height="450" /> </center>
 
+  	<p> <strong> Resolution: Limit user input, for example perhaps three checkins per hour. </strong> </p>
 
 
 
 
+  	<h3> 3. X-Frame-Options Header Not Set: </h3>
+
+  	<p> Severity: <strong> High </strong> </p>
+
+  	<p> A quick start site attack deployed via OWASP's ZAP tool exposed this error, which makes the web app susceptible to clickjacking attacks, through which the user can be tricked into revealing sensitive information. </p>
+
+  	<p> <i> From OWASP's website: </i> "Clickjacking, also known as a "UI redress attack", is when an attacker uses multiple transparent or opaque layers to trick a user into clicking on a button or link on another page when they were intending to click on the the top level page. Thus, the attacker is "hijacking" clicks meant for their page and routing them to another page, most likely owned by another application, domain, or both. Using a similar technique, keystrokes can also be hijacked. With a carefully crafted combination of stylesheets, iframes, and text boxes, a user can be led to believe they are typing in the password to their email or bank account, but are instead typing into an invisible frame controlled by the attacker." </p>
+
+  	<p> Although the ZAP tool lists this as a medium risk issue, I would argue that my partner's web app is especially susceptible to these sorts of attacks due to its glaring lack of security protocols. </p>
+
+  	<center> <img src="zapshot.png" width="550" height="300" /> </center>
+
+  	<p> <strong> Resolution: </strong> Send relevant X-Frame-Options HTTP response headers so that the browser can prevent framing from other domains. Similar parameters can be specified in the source code to ensure that the given frame remains intact. Using X-Frame-Options headers like DENY, SAMEORIGIN, and ALLOW-FROM, the server-side can prevent clickjacking attacks. </p>
 
 
-
-
-
-
-
-
-
-
-
+  	<h2> Conclusion: </h2>
+  	<p> The specfications for assignment three led to a number of security vulnerabilities. The issues above can be easily remedied with relevant security measures, mainly sanitization of user input. Overall, the take away from this assessment should be that <strong>USER INPUT CANNOT BE TRUSTED. </strong> </p>
 
 
 </body>
