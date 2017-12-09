@@ -1,0 +1,1 @@
+I believe all aspects of the assignment have been implemented correctly. Three security vulnerabilities have been identified with proper evidence. I only worked with my partner on this assignment, coordinating and discussing the assignment. I spent about 3.5 hours on this assignment.
