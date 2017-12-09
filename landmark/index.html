@@ -5,12 +5,17 @@
     <title>Landmarks</title>
     <meta name="viewport" content="initial-scale=1.0">
     <script src="https://maps.google.com/maps/api/js?libraries=geometry" async defer></script>
+    <script type="text/javascript" src="instafetch.min.js"></script>
+
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" type="text/css"/>
 
   </head>
 
 <body>
+
+
+</script>
 	
 	<script>
 
@@ -36,7 +41,7 @@ function serverRequest() {
 		var mylogin = "VKIDCFKV";
 	 	
 		var xhr = new XMLHttpRequest();
-		var url = "https://defense-in-derpth.herokuapp.com/sendLocation";
+		var url = "https://infinite-island-32049.herokuapp.com/sendLocation"
 		var parameters = "login="+mylogin+"&lat="+myLat+"&lng="+myLng;
 		xhr.open('POST', url, true);
 
@@ -129,7 +134,8 @@ function renderMap(parsed, mylogin)
 
 			});
 
-		
+
+
 		
 		marker.content = '<div id= "content">'+
 					"<div id='attr'>"+"Login: "+"</div>"+"<val>"+login+"</val>"+
@@ -181,10 +187,20 @@ function renderMap(parsed, mylogin)
 		});
 
 
+
+  		instafetch.init({
+    	accessToken: '19580272.cea5ce5.c799a9159ee146a39d405b218bd6ee45',
+    	target: 'instafetch',
+    	numOfPics: 20,
+    	caption: false
+  			});
+
+
+
 	 	landmarker.content = '<div id= "content">'+
 					"<div id='attr'>"+"Here's a landmark near you: "+"</div>"+"<val>"+details+"</val>"+
 					"<div id='attr'>"+"Distance: "+"</div>"+"<val>"+landdist+" miles"+"</val>"+
-					"</div>";
+					"</div>" + "<div id='instafetch'></div>";
 
 		var infoWindow = new google.maps.InfoWindow();
 			google.maps.event.addListener(landmarker, 'click', function () {
